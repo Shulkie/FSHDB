@@ -1,0 +1,32 @@
+﻿@model FSHDB.Models.CreadoX
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Borrar</h2>
+
+<h3>Estás seguro/a de querer eliminar esto?</h3>
+<div>
+    <h4>CreadoX</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreadoX1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreadoX1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

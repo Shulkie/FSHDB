@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HeroinasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CreadoX">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreadoX1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Heroinas" Relationship="Self.FK_Heroinas_CreadoX1" FromRole="CreadoX" ToRole="Heroinas" />
+  </EntityType>
+  <EntityType Name="Heroinas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_CreadoX" Type="Int32" />
+    <Property Name="ID_Origen" Type="Int32" />
+    <NavigationProperty Name="CreadoX" Relationship="Self.FK_Heroinas_CreadoX1" FromRole="Heroinas" ToRole="CreadoX" />
+    <NavigationProperty Name="Origenes" Relationship="Self.FK_Heroinas_Origenes" FromRole="Heroinas" ToRole="Origenes" />
+  </EntityType>
+  <EntityType Name="Origenes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Origen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Heroinas" Relationship="Self.FK_Heroinas_Origenes" FromRole="Origenes" ToRole="Heroinas" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Heroinas_CreadoX1">
+    <End Role="CreadoX" Type="Self.CreadoX" Multiplicity="0..1" />
+    <End Role="Heroinas" Type="Self.Heroinas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreadoX">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Heroinas">
+        <PropertyRef Name="ID_CreadoX" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Heroinas_Origenes">
+    <End Role="Origenes" Type="Self.Origenes" Multiplicity="0..1" />
+    <End Role="Heroinas" Type="Self.Heroinas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Origenes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Heroinas">
+        <PropertyRef Name="ID_Origen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HeroinasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CreadoX" EntityType="Self.CreadoX" />
+    <EntitySet Name="Heroinas" EntityType="Self.Heroinas" />
+    <EntitySet Name="Origenes" EntityType="Self.Origenes" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Heroinas_CreadoX1" Association="Self.FK_Heroinas_CreadoX1">
+      <End Role="CreadoX" EntitySet="CreadoX" />
+      <End Role="Heroinas" EntitySet="Heroinas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Heroinas_Origenes" Association="Self.FK_Heroinas_Origenes">
+      <End Role="Origenes" EntitySet="Origenes" />
+      <End Role="Heroinas" EntitySet="Heroinas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
