@@ -1,0 +1,17 @@
+﻿
+.jumbotron {
+    color: white;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+}
+
+.titulo {
+
+text-align:end
+}
+
+p {
+    color: blue
+}
